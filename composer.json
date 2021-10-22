@@ -1,17 +1,14 @@
 {
     "name": "sunrise/http-header-collection",
     "homepage": "https://github.com/sunrise-php/http-header-collection",
-    "description": "Sunrise HTTP header collection for PHP 7.1+ based on PSR-7",
+    "description": "Sunrise // HTTP header collection",
     "license": "MIT",
     "keywords": [
         "fenric",
         "sunrise",
         "http",
-        "header",
-        "collection",
         "http-header",
         "http-header-collection",
-        "psr-7",
         "php7",
         "php8"
     ],
@@ -24,8 +21,7 @@
     ],
     "require": {
         "php": "^7.1|^8.0",
-        "psr/http-message": "^1.0",
-        "sunrise/http-header": "^1.1"
+        "sunrise/http-header": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "7.5.20|9.5.0",
@@ -36,15 +32,14 @@
             "Sunrise\\Http\\Header\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Sunrise\\Http\\Header\\Tests\\": "tests/"
-        }
-    },
     "scripts": {
         "test": [
-            "phpunit --colors=always --coverage-text",
-            "phpcs"
+            "phpcs",
+            "XDEBUG_MODE=coverage phpunit --coverage-text --colors=always"
+        ],
+        "build": [
+            "phpdoc -d src/ -t phpdoc/",
+            "XDEBUG_MODE=coverage phpunit --coverage-html coverage/"
         ]
     }
 }
