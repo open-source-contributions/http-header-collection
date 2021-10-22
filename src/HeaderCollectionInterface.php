@@ -15,14 +15,11 @@ namespace Sunrise\Http\Header;
  * Import classes
  */
 use Countable;
-use IteratorAggregate;
-use Psr\Http\Message\MessageInterface;
-use Sunrise\Http\Header\HeaderInterface;
 
 /**
  * HeaderCollectionInterface
  */
-interface HeaderCollectionInterface extends Countable, IteratorAggregate
+interface HeaderCollectionInterface extends Countable
 {
 
     /**
@@ -35,31 +32,9 @@ interface HeaderCollectionInterface extends Countable, IteratorAggregate
     public function add(HeaderInterface $header) : void;
 
     /**
-     * Sets the collection headers to the given message
+     * Gets all headers from the collection
      *
-     * @param MessageInterface $message
-     *
-     * @return MessageInterface
-     *
-     * @link https://www.php-fig.org/psr/psr-7/
+     * @return array<HeaderInterface>
      */
-    public function setToMessage(MessageInterface $message) : MessageInterface;
-
-    /**
-     * Adds the collection headers to the given message
-     *
-     * @param MessageInterface $message
-     *
-     * @return MessageInterface
-     *
-     * @link https://www.php-fig.org/psr/psr-7/
-     */
-    public function addToMessage(MessageInterface $message) : MessageInterface;
-
-    /**
-     * Converts the collection to array
-     *
-     * @return array
-     */
-    public function toArray() : array;
+    public function all() : array;
 }
