@@ -12,13 +12,6 @@
 namespace Sunrise\Http\Header;
 
 /**
- * Import classes
- */
-use ArrayIterator;
-use Psr\Http\Message\MessageInterface;
-use Sunrise\Http\Header\HeaderInterface;
-
-/**
  * Import functions
  */
 use function count;
@@ -32,14 +25,14 @@ class HeaderCollection implements HeaderCollectionInterface
     /**
      * The collection headers
      *
-     * @var HeaderInterface[]
+     * @var array<HeaderInterface>
      */
     protected $headers = [];
 
     /**
      * Constructor of the class
      *
-     * @param HeaderInterface[] $headers
+     * @param iterable<HeaderInterface> $headers
      */
     public function __construct(iterable $headers = [])
     {
@@ -49,7 +42,7 @@ class HeaderCollection implements HeaderCollectionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function add(HeaderInterface $header) : void
     {
@@ -57,43 +50,11 @@ class HeaderCollection implements HeaderCollectionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function setToMessage(MessageInterface $message) : MessageInterface
+    public function all() : array
     {
-        foreach ($this->headers as $header) {
-            $message = $header->setToMessage($message);
-        }
-
-        return $message;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function addToMessage(MessageInterface $message) : MessageInterface
-    {
-        foreach ($this->headers as $header) {
-            $message = $header->addToMessage($message);
-        }
-
-        return $message;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function toArray() : array
-    {
-        $headers = [];
-        foreach ($this->headers as $header) {
-            $name = $header->getFieldName();
-            $value = $header->getFieldValue();
-
-            $headers[$name][] = $value;
-        }
-
-        return $headers;
+        return $this->headers;
     }
 
     /**
@@ -101,18 +62,8 @@ class HeaderCollection implements HeaderCollectionInterface
      *
      * @return int
      */
-    public function count()
+    public function count() : int
     {
         return count($this->headers);
-    }
-
-    /**
-     * Gets an external iterator
-     *
-     * @return ArrayIterator
-     */
-    public function getIterator()
-    {
-        return new ArrayIterator($this->headers);
     }
 }
