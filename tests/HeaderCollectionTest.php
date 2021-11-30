@@ -28,7 +28,7 @@ class HeaderCollectionTest extends TestCase
 
         $collection = new HeaderCollection($headers);
 
-        $this->assertEquals($headers, $collection->all());
+        $this->assertSame($headers, $collection->all());
     }
 
     public function testAdd() : void
@@ -45,7 +45,7 @@ class HeaderCollectionTest extends TestCase
         $collection->add($headers[1]);
         $collection->add($headers[2]);
 
-        $this->assertEquals($headers, $collection->all());
+        $this->assertSame($headers, $collection->all());
     }
 
     public function testCount() : void
